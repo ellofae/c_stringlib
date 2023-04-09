@@ -239,3 +239,26 @@ size_t lib_writeBytes(const char *filename, const char *src) {
     close(fileDesc);
     return chars;
 }
+
+// Write one byte c to a file which filename is passed as an argument
+// If such file doesn't exists, function creates one with the passed filename
+// If writing succeds, it returns 1 as an amount of bytes written to the file.
+size_t lib_writeOneByte(const char *filename, const char c) {
+    FILE* file;
+
+    if((file = fopen(filename, "a")) == NULL) {
+        printf("Error occured during opening file '%s'\n", filename);
+        return -1;
+    }
+
+    int ch = (int) c;
+    putc(ch, file);
+    fclose(file);
+
+    return 1;
+}
+
+
+size_t lib_copyFiles(const char *dest, const char *src) {
+    
+}

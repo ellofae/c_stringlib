@@ -30,6 +30,7 @@ size_t lib_strlen(const char *str);
 
 // Strings with files functionality
 size_t lib_writeBytes(const char *filename, const char *src);
-size_t lib_writeBytes(const char *filename, const char *src);
+size_t lib_writeOneByte(const char *filename, const char c);
+size_t lib_copyFiles(const char *dest, const char *src);
 
 #endif
