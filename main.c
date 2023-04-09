@@ -1,9 +1,11 @@
 #include "stringlib.h"
 
-int main(int args, char **argv) {
-    char src[80] = "Hello my wonderful friend! ";
-    char dest[50] = "How are you today?";
 
-    printf("test: %s\n", lib_strcat_n(src, dest, 7));
+int main(int args, char **argv) {
+    const char *str = "Wonderful worlds that are spinning across the universe!";
+
+    size_t amount = lib_writeBytes("file.txt", str);
+    printf("%d\n", amount);
+    
     return 0;   
 }

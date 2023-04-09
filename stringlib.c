@@ -1,5 +1,7 @@
 #include "stringlib.h"
 
+// String functionality
+
 // Compares two strings and returns 0 if they are equal 
 // or value > 0 or value < 0 depending on the position
 // of two characters in the alphabet
@@ -199,4 +201,41 @@ size_t lib_strlen(const char *str) {
         len++;
     }
     return len;
+}
+
+// Strings with files functionality
+
+// Write the bytes of src string to a file which filename is passed as an argument
+// If such file doesn't exists, function creates one with the passed filename
+// If writing succeds, it returns amount of bytes written to the file.
+size_t lib_writeBytes(const char *filename, const char *src) {
+    int fileDesc;
+    char buf[BUFSIZE];
+
+    if((fileDesc = open(filename, O_RDWR | O_APPEND, 0)) == -1) {
+        printf("Error occured during opening file '%s'\n", filename);
+
+        if((fileDesc = creat(filename, PERMS)) == -1) {
+            printf("Didn't manage to create file '%s'\n", filename);
+            return -1;
+        } else {
+            printf("File '%s' was created\n", filename);
+        }
+    }
+
+    int len = 0;
+    while((*src != '\0') && (len != BUFSIZE)) {
+        *(buf + len++) = *src++;
+    }
+    *(buf + len) = '\0';
+
+    int chars = lib_strlen(buf);
+    if(write(fileDesc, &buf, chars) != chars) {
+        printf("Error while writing to a file!\n");
+        close(fileDesc);
+        return -1;
+    }
+
+    close(fileDesc);
+    return chars;
 }
