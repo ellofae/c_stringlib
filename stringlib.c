@@ -282,6 +282,31 @@ size_t lib_copyFiles(const char *dest, const char *src) {
         }
         amount += n;
     }
+    close(fileSrc);
+    close(fileDest);
     
+    return amount;
+}
+
+// Writes the content of the file the standard output
+size_t lib_readFile(const char *filename) {
+    int file, n;
+    char buf[BUFSIZE];
+
+    if((file = open(filename, O_RDONLY, 0)) == -1) {
+        printf("Didn't manage to open the file '%s'\n", filename);
+        return -1;
+    }
+
+    int amount = 0;
+    while((n = read(file, &buf, BUFSIZE)) > 0) {
+        if (write(STDOUT, &buf, n) != n) {
+            printf("Error occured during writing to a standarnd output\n");
+            return -1;
+        }
+        amount += n;
+    }
+    close(file);
+
     return amount;
 }

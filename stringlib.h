@@ -9,6 +9,7 @@
 
 #define PERMS 0666
 #define BUFSIZE 4096
+#define STDOUT 1
 
 // String functionality
 int lib_strcmp(const char *str1, const char *str2);
@@ -31,6 +32,7 @@ size_t lib_strlen(const char *str);
 // Strings with files functionality
 size_t lib_writeBytes(const char *filename, const char *src);
 size_t lib_writeOneByte(const char *filename, const char c);
+size_t lib_readFile(const char *filename);
 size_t lib_copyFiles(const char *dest, const char *src);
 
 #endif
