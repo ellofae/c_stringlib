@@ -258,7 +258,30 @@ size_t lib_writeOneByte(const char *filename, const char c) {
     return 1;
 }
 
-
+// Copies the content of the source file src to the destination file dest
+// Returns amount of bytes that were written to the destination file
 size_t lib_copyFiles(const char *dest, const char *src) {
+    int fileDest, fileSrc, n;
+    char buf[BUFSIZE];
+
+    if ((fileSrc = open(src, O_RDONLY, 0)) == -1) {
+        printf("Didn't manage to open the source file '%s'\n", src);
+        return -1;
+    }
+
+    if((fileDest = creat(dest, PERMS)) == -1) {
+        printf("Didn't namage to create a destination file '%s'\n", dest);
+        return -1;
+    }
     
+    int amount = 0;
+    while((n = read(fileSrc, &buf, BUFSIZE)) > 0) {
+        if (write(fileDest, &buf, n) != n) {
+            printf("Error occured during writing to a file '%s'\n", dest);
+            return -1;
+        }
+        amount += n;
+    }
+    
+    return amount;
 }
