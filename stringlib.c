@@ -73,6 +73,40 @@ int lib_strcpy_n(char *dest, const char *src, size_t n) {
     return 0;
 }
 
+// Appends the string pointed to, by src to the end of the string pointed to by dest
+char *lib_strcat(char *dest, const char *src) {
+    char *ptr = dest;
+
+    while(*ptr != '\0') {
+        ptr++;
+    }
+
+    while(*src != '\0') {
+        *ptr++ = *src++;
+    }
+    *ptr++ = '\0';
+
+    return dest;
+}
+
+// Appends the string pointed to, by src to the end of the string pointed to,
+// by dest up to n characters long
+char *lib_strcat_n(char *dest, const char *src, size_t n) {
+    char *ptr = dest;
+
+    while(*ptr != '\0') {
+        ptr++;
+    }
+
+    int count = 0;
+    while(*src != '\0' && count++ != n) {
+        *ptr++ = *src++;
+    }
+    *ptr++ = '\0';
+
+    return dest;
+}
+
 // Finds the first character in the string str1 that matches any character specified in str2
 // and then returns a pointer to that character.
 char *lib_strpbrk(const char *str1, const char *str2) {    
@@ -87,6 +121,9 @@ char *lib_strpbrk(const char *str1, const char *str2) {
         }
         str1++;
     }
+
+    map_free();
+    return NULL;
 }
 // Searches for the first occurrence of the character c
 // in the first n bytes of the string pointed to by the argument str

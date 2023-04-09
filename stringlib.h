@@ -18,7 +18,8 @@ int lib_memcmp(const void *str1, const void *str2, size_t n);
 
 char *lib_strchr(const char *str, int c);
 char *lib_strpbrk(const char *str1, const char *str2);
-
+char *lib_strcat(char *dest, const char *src);
+char *lib_strcat_n(char *dest, const char *src, size_t n);
 
 
 size_t lib_strcspn(const char *str1, const char *str2);
