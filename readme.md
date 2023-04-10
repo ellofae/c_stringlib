@@ -1,0 +1,3 @@
+## c_stringlib
+_____________________________________________________________________________________________________________
+Library for working with strings implementation in C
